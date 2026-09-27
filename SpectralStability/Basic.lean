@@ -26,17 +26,17 @@ open Matrix
 /-- The internal symplectic matrix. -/
 def J : Matrix (Fin 2) (Fin 2) ℝ := !![0, 1; -1, 0]
 
-/-- The centered difference `(Δ₁ψ)_n = ψ_{n+1} − ψ_{n−1}`. -/
-def Δ₁ (N : ℕ) : Matrix (Fin N) (Fin N) ℝ :=
-  of fun i j => (if j.val = i.val + 1 then 1 else 0) - (if j.val + 1 = i.val then 1 else 0)
+/-- The forward shift `(Uψ)_n = ψ_{n+1}`. -/
+def U (N : ℕ) : Matrix (Fin N) (Fin N) ℝ := of fun i j => if j.val = i.val + 1 then 1 else 0
+
+/-- The centered difference `(Δ₁ψ)_n = ψ_{n+1} − ψ_{n−1}`, i.e. `U − Uᵀ`. -/
+def Δ₁ (N : ℕ) : Matrix (Fin N) (Fin N) ℝ := U N - (U N)ᵀ
 
 theorem J_skew : Jᵀ = -J := by
   ext i j; fin_cases i <;> fin_cases j <;> simp [J]
 
 theorem Δ₁_skew (N : ℕ) : (Δ₁ N)ᵀ = -Δ₁ N := by
-  ext i j
-  simp only [transpose_apply, Δ₁, of_apply, neg_apply]
-  split_ifs <;> (try norm_num) <;> omega
+  rw [Δ₁, transpose_sub, transpose_transpose, neg_sub]
 
 /-- **Theorem 3.1.** The product of two skew factors acting on independent indices is
 symmetric: `(J ⊗ Δ₁)ᵀ = J ⊗ Δ₁`. -/
