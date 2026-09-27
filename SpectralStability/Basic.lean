@@ -36,7 +36,7 @@ theorem J_skew : Jᵀ = -J := by
 theorem Δ₁_skew (N : ℕ) : (Δ₁ N)ᵀ = -Δ₁ N := by
   ext i j
   simp only [transpose_apply, Δ₁, of_apply, neg_apply]
-  split_ifs <;> omega
+  split_ifs <;> (try norm_num) <;> omega
 
 /-- **Theorem 3.1.** The product of two skew factors acting on independent indices is
 symmetric: `(J ⊗ Δ₁)ᵀ = J ⊗ Δ₁`. -/
