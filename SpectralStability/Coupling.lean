@@ -85,10 +85,9 @@ theorem comm_isotropic (l : ℝ) : symm2 l 0 l * Jp - Jp * symm2 l 0 l = 0 := by
 theorem skew_coupling_commutator {n : Type*} [Fintype n] (H E : Matrix n n ℝ) (hH : Hᵀ = H)
     (hE : Eᵀ = -E) (ε : ℝ) :
     (H + ε • E) * (H + ε • E)ᵀ - (H + ε • E)ᵀ * (H + ε • E) = (2 * ε) • (E * H - H * E) := by
-  rw [transpose_add, transpose_smul, hH, hE]
-  simp only [add_mul, mul_add, smul_mul_assoc, mul_smul_comm, smul_smul, smul_neg, neg_mul,
-    mul_neg, smul_sub, two_mul, add_smul]
-  abel
+  rw [transpose_add, transpose_smul, hH, hE, smul_neg, ← sub_eq_add_neg]
+  simp only [add_mul, mul_add, sub_mul, mul_sub, smul_mul_assoc, mul_smul_comm, smul_smul]
+  module
 
 /-- When the obstruction field is uniform the centered gradient is zero, so the leading block
 vanishes. -/
@@ -108,7 +107,9 @@ theorem rot_fixes_J (c s : ℝ) (h : c ^ 2 + s ^ 2 = 1) : rot c s * Jp * (rot c 
 /-- A rotation preserves the trace: `tr(R M Rᵀ) = tr M`. -/
 theorem rot_trace (c s a b d : ℝ) (h : c ^ 2 + s ^ 2 = 1) :
     (rot c s * symm2 a b d * (rot c s)ᵀ).trace = (symm2 a b d).trace := by
-  simp [Matrix.trace_fin_two, rot, symm2, Matrix.mul_apply, Fin.sum_univ_two]
+  rw [Matrix.trace_fin_two, Matrix.trace_fin_two]
+  simp only [Matrix.mul_apply, Fin.sum_univ_two, Matrix.transpose_apply]
+  simp [rot, symm2]
   linear_combination (a + d) * h
 
 /-- **The leading block is invariant under a global rotation.** Rotating the gradient by `R`
@@ -138,7 +139,7 @@ theorem Jc_ξm : Jc *ᵥ ξm = (-I) • ξm := by
 
 /-- The difference of phases: `(e^{iθ} - e^{-iθ}) i = -2 sin θ`. -/
 theorem phase_difference (θ : ℂ) : (exp (θ * I) - exp (-θ * I)) * I = -2 * sin θ := by
-  rw [two_sin]; ring
+  linear_combination two_sin θ
 
 /-- The Fourier mode `ψ_n = e^{iθn} ξ`. -/
 noncomputable def mode (θ : ℝ) (ξ : Fin 2 → ℂ) (n : ℤ) : Fin 2 → ℂ :=
