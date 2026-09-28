@@ -9,4 +9,4 @@ rev = "v4.34.1"
 
 [[lean_lib]]
 name = "SpectralStability"
-roots = ["SpectralStability.Basic"]
+roots = ["SpectralStability.Basic", "SpectralStability.Coupling", "SpectralStability.Recovered"]
