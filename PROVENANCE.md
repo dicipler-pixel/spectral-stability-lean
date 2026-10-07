@@ -15,6 +15,7 @@ Operators with Gradient-Controlled Pseudospectra* (22–24 June). The cascade th
 **Lean files.** `Basic.lean`, `Coupling.lean`, `Recovered.lean` and the six files in
 `FalseControls/` were written for this repository from those statements. The repair in
 `Recovered.lean` (the plain centered difference as the skew transport) is Claude's
-construction, stated so the drafts' Proposition 5.3 holds as written.
+construction, stated so the commutation step of the drafts' Proposition 5.3 holds as written
+(see `LIMITATIONS.md`).
 
 Lean v4.34.1, Mathlib v4.34.1. Verified at commit `cb9807b` (GitHub Actions run 36378879360).
