@@ -50,7 +50,7 @@ first order in `ε`.
 
 | Draft | Result | Theorem |
 | :--- | :--- | :--- |
-| *The Obstruction Cascade*, Thm 4.1 | `⟨m|Σ'|n⟩ = (λₙ − λₘ)⟨m|n'⟩`: across a nonzero gap, zero interband coupling forces a zero connection form | `interband_coupling`, `coupling_zero_connection_zero` |
+| *The Obstruction Cascade*, Thm 4.1 | `⟨m\|Σ'\|n⟩ = (λₙ − λₘ)⟨m\|n'⟩`: across a nonzero gap, zero interband coupling forces a zero connection form | `interband_coupling`, `coupling_zero_connection_zero` |
 | Cascade eq. (9.4) | For skew `A` and symmetric `D`, `[D + A, (D + A)ᵀ] = 2[A, D]`, so `D + A` is normal exactly when `A` and `D` commute | `skew_transport_commutator`, `skew_transport_normal_iff` |
 | Proposition 5.3 | With the plain centered difference (skew on the periodic lattice), the commutator with `D` is a pure gradient, it is zero for a uniform field, and for `N ≥ 3` and `α ≠ 0` it is zero only then. These are statements about the lattice operators; joining them with (9.4), which is stated for matrices, is not done in Lean | `adiff_skew`, `dop_symmetric`, `commutator_gradient`, `uniform_commutes`, `commutes_forces_uniform` |
 
